@@ -4,7 +4,7 @@ This repository servers as the backend to the untitled pet project. It is built 
 
 This backend is pretty simple, basically will serve as the CRUD for Pets and their Owners.
 
-> Environment Variables
+> Environment Variables:
 This project uses a .env file to centralize environment variables and sensitive configurations
 The values are automatically loaded by Spring Boot in application.properties
 
