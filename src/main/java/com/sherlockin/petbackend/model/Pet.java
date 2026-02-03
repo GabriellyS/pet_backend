@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "pet")
+@Table(name = "pets")
 public class Pet {
 
     @Id
@@ -20,6 +20,7 @@ public class Pet {
 
     private Integer age;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User owner;
 }
