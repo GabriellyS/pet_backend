@@ -12,7 +12,7 @@ import java.util.Set;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -25,14 +25,22 @@ public class User {
     @Column (unique = true)
     private String phone;
     private String password;
-    private String fistName;
+    private String firstName;
     private String lastName;
     private String address;
 
-    @OneToMany
-    private List<Pet> pet;
+    @OneToMany(mappedBy = "owner")
+    private List<Pet> pets;
 
-    @Enumerated
+    //Numerando o Enum em ordem
+    @Enumerated(EnumType.STRING)
+    //Deixando claro que o elementCollection esta apontando para o enum Role
+    @ElementCollection(targetClass = Role.class)
+    //os elementos do atributo abaixo ficam na tabela "user_roles"
+    @CollectionTable(name = "user_roles",
+            //e ele liga a essa classe (user) pelo "user_id"
+            joinColumns = @JoinColumn(name = "user_id")
+    )
     private Set<Role> role;
 
 }
