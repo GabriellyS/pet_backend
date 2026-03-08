@@ -14,7 +14,11 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="username" type="VARCHAR(100)">
+            <column name="email" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="document" type="VARCHAR(14)">
                 <constraints nullable="false" unique="true"/>
             </column>
 
@@ -26,8 +30,8 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="firstName" type="VARCHAR(100)"/>
-            <column name="lastName" type="VARCHAR(100)"/>
+            <column name="first_name" type="VARCHAR(100)"/>
+            <column name="last_name" type="VARCHAR(100)"/>
             <column name="address" type="VARCHAR(255)"/>
 
         </createTable>
