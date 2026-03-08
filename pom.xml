@@ -13,21 +13,11 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Pet Backend</name>
 	<description>Backend for the Pet Project</description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
+	
+	
 	<properties>
 		<java.version>25</java.version>
+		<mysql.version>9.6.0</mysql.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -46,15 +36,18 @@
 			<artifactId>spring-boot-starter-webmvc</artifactId>
 		</dependency>
 
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.32</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
-			<scope>runtime</scope>
+			<version>${mysql.version}</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
@@ -77,6 +70,26 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+                    <groupId>org.liquibase</groupId>
+                    <artifactId>liquibase-maven-plugin</artifactId>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.mysql</groupId>
+							<artifactId>mysql-connector-j</artifactId>
+							<version>${mysql.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <changeLogFile>src/main/resources/db/migration/db.changelog-master.xml</changeLogFile>
+                        <driver>com.mysql.cj.jdbc.Driver</driver>
+                        <username />
+                        <password />
+                        <propertyFileWillOverride>true</propertyFileWillOverride>
+                        <propertyFile>src/main/resources/liquibase.properties</propertyFile>
+                        <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+                    </configuration>
+                </plugin>
 		</plugins>
 	</build>
 

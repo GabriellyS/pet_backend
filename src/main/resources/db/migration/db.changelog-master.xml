@@ -6,7 +6,7 @@
       http://www.liquibase.org/xml/ns/dbchangelog
       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.23.xsd">
 
-    <include file="db/changelog/001-create-user.xml"/>
-    <include file="db/changelog/002-create-pet.xml"/>
+    <include file="db/migration/001-create-user.xml"/>
+    <include file="db/migration/002-create-pet.xml"/>
 
 </databaseChangeLog>
