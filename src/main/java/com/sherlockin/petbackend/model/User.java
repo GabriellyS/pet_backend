@@ -1,12 +1,19 @@
 package com.sherlockin.petbackend.model;
 
-import com.sherlockin.petbackend.model.Enum.Role;
-import jakarta.persistence.*;
+import java.util.List;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
-import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,11 +21,11 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User {
-
+    
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     private String document;
     private String email;
     private String phone;
@@ -26,19 +33,14 @@ public class User {
     private String firstName;
     private String lastName;
     private String address;
-
+    
     @OneToMany(mappedBy = "owner")
     private List<Pet> pets;
-
-    //Numerando o Enum em ordem
-    @Enumerated(EnumType.STRING)
-    //Deixando claro que o elementCollection esta apontando para o enum Role
-    @ElementCollection(targetClass = Role.class)
-    //os elementos do atributo abaixo ficam na tabela "user_roles"
-    @CollectionTable(name = "user_roles",
-            //e ele liga a essa classe (user) pelo "user_id"
-            joinColumns = @JoinColumn(name = "user_id")
-    )
-    private Set<Role> role;
-
+    
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinTable(name="users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name="role_id"))
+    private List<Role> roles;
+    
 }
