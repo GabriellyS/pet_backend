@@ -1,6 +1,7 @@
 package com.sherlockin.petbackend.model;
 
 import java.util.List;
+import com.sherlockin.petbackend.config.Auditable;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -20,7 +21,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User extends Auditable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
