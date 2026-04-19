@@ -13,6 +13,14 @@
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
 
             <column name="email" type="VARCHAR(100)">
                 <constraints nullable="false" unique="true"/>
@@ -39,15 +47,29 @@
 
     <!-- Tabela Auxiliar de USER_ROLES (ElementCollection de Enum) -->
 
-    <changeSet id="002-create-user-roles" author="gabs">
+    <changeSet id="002-create-role" author="sherlockin">
+        <createTable tableName="roles">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="003-create-user-roles" author="gabs">
         <createTable tableName="user_roles">
 
             <column name="user_id" type="BIGINT">
-                <constraints nullable="false" primaryKey="true"/>
+                <constraints nullable="false"/>
             </column>
 
-            <column name="role" type="VARCHAR(50)">
-                <constraints nullable="false" primaryKey="true"/>
+            <column name="role_id" type="BIGINT">
+                <constraints nullable="false"/>
             </column>
         </createTable>
 
@@ -57,6 +79,13 @@
                 referencedTableName="users"
                 referencedColumnNames="id"
                 constraintName="fk_user_roles_user"/>
+
+        <addForeignKeyConstraint
+                baseTableName="user_roles"
+                baseColumnNames="role_id"
+                referencedTableName="roles"
+                referencedColumnNames="id"
+                constraintName="fk_user_roles_role"/>
     </changeSet>
 
 </databaseChangeLog>

@@ -7,7 +7,7 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <!-- Tabela PETS -->
-    <changeSet id="002-create-pet" author="gabs">
+    <changeSet id="004-create-pet" author="gabs">
         <createTable tableName="pets">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>

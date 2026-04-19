@@ -1,4 +1,4 @@
-package com.sherlockin.petbackend.model.Enum;
+package com.sherlockin.petbackend.model.enums;
 
 public enum AppointmentStatus {
     SCHEDULED,
