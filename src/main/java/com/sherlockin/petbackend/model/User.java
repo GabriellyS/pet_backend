@@ -14,11 +14,12 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-
+@Getter
 @Entity
 @Table(name = "users")
 public class User extends Auditable {
@@ -26,7 +27,6 @@ public class User extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
     private String document;
     private String email;
     private String phone;
@@ -39,9 +39,20 @@ public class User extends Auditable {
     private List<Pet> pets;
     
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinTable(name="users_roles",
+    @JoinTable(name="user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name="role_id"))
     private List<Role> roles;
-    
+
+
+    public User(String document, String email, String phone, String password, String firstName, String lastName, String address) {
+        this.document = document;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+    }
+
 }

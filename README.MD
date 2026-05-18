@@ -42,3 +42,8 @@ Here's the entities we have:
     Role:
     - id (Long)
     - name (String)
+
+> Authentication:
+To use authentication and JWT generation, execute these commands:
+`openssl genpkey -algorithm RSA -out src/main/resources/keys/private_key.pem
+openssl rsa -pubout -in src/main/resources/keys/private_key.pem -out src/main/resources/keys/public_key.pem`
